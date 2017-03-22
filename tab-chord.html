@@ -8,6 +8,11 @@
             :host {
 
                 --fret-size: 30px;
+                --fret-thickness: 1px;
+
+                --num-strings: 6;
+
+                --fretboard-width: calc( var(--fret-size) * (var(--num-strings) - 1) + var(--fret-thickness) );
 
 
             }
@@ -18,7 +23,13 @@
             }
 
             .fretboard {
+                width: var(--fretboard-width);
+                height: var(--fretboard-width);
 
+                background-image:
+                    linear-gradient(black var(--fret-thickness), transparent 0),
+                    linear-gradient(90deg, black var(--fret-thickness), transparent 0);
+                background-size: var(--fret-size);
             }
 
         </style>
