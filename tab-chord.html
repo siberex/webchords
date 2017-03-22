@@ -1,5 +1,9 @@
 
+<link rel="import" href="node_modules/@polymer/polymer/polymer-element.html">
+
+
 <dom-module id="tab-chord">
+
     <style>
         :host {
             /* ... */
@@ -24,8 +28,26 @@
 
 
     <script>
-        Polymer({
-            is: 'tab-chord'
-        });
+        // Extend Polymer.Element base class
+        // https://github.com/Polymer/polymer#20-es6-class-based-syntax
+        class TabChord extends Polymer.Element {
+            static get is() { return 'tab-chord'; }
+            static get properties() { return { /* properties metadata */ } }
+            static get observers() { return [ /* observer descriptors */ ] }
+            constructor() {
+                super();
+                //...
+            }
+            connectedCallback() {
+                super.connectedCallback();
+                //...
+            }
+            //...
+        }
+
+
+        // Register custom element definition using standard platform API
+        customElements.define(TabChord.is, TabChord);
     </script>
+
 </dom-module>
