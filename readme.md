@@ -12,16 +12,26 @@ Then go to [http://localhost:8877/](http://localhost:8877/)
 ### DEV references
 
 #### Guitar fretboard
- 
+
+
+Notes sequence:
+
+	A	A#	B	C	C#	D	D#	E	F	F#	G	G#	(A	A#	B	C	C#	...)
+
+From Do (Do → Re → Mi → Fa → Sol → La → Ti):
+
+	C	C#	D	D#	E	F	F#	G	G#	A	A#	B	(C	C#	D	D#	E	...)
+
+
 Standard tuning EADGBE:
 
-	0	1	2	3•	4	5•	6	7•	8	9•	10	11	12:	13	14	15•	16	17•	18	19•	20	21	22	23	24
-	E4	F	F#	G	G#	A	A#	B	C	C#	D	D#	E	F	F#	G	G#	A	A#	B	C	C#
-	B3	C	C#	D	D#	E	F	F#	G	G#	A	A#	B	C	C#	D	D#	E	F	F3
-	G3	G#	A	A#	B	C	C#	D	D#
-	D3	...
-	A2	...
-	E2	F	F#
+	0	1	2	3•	4	5•	6	7•	8	9•	10	11	12:	13	14	15•	16	17•	18	19•	20	21	22
+	E4	F	F#	G	G#	A	A#	B	C	C#	D	D#	E	F	F#	G	G#	A	A#	B	C	C#	D
+	B3	C	C#	D	D#	E	F	F#	G	G#	A	A#	B	C	C#	D	D#	E	F	F#	G	G#	A
+	G3	G#	A	A#	B	C	C#	D	D#	E	F	F#	G	G#	A	A#	B	C	C#	D	D#	E	F
+	D3	D#	E	F	F#	G	G#	A	A#	B	C	C#	D	D#	E	F	F#	G	G#	A	A#	B	C
+	A2	A#	B	C	C#	D	D#	E	F	F#	G	G#	A	A#	B	C	C#	D	D#	E	F	F#	G
+	E2	F	F#	G	G#	A	A#	B	C	C#	D	D#	E	F	F#	G	G#	A	A#	B	C	C#	D
 
 
 #### Ukulele fretboard 
@@ -50,18 +60,24 @@ Standard tuning GCEA:
 
 #### Tabulature notations
 
-[ASCII_tab](https://en.wikipedia.org/wiki/ASCII_tab)
+- [ASCII_tab](https://en.wikipedia.org/wiki/ASCII_tab)
+
 
 #### Music notations
+
+- [MEI — The Music Encoding Initiative](https://github.com/music-encoding/music-encoding)
 
 - [MusicXML format](https://en.wikipedia.org/wiki/MusicXML)
 
 - [Notation Interchange File Format](https://en.wikipedia.org/wiki/Notation_Interchange_File_Format)
 
+- [ABC notation](https://en.wikipedia.org/wiki/ABC_notation)
+
+- [MIDI](https://en.wikipedia.org/wiki/Comparison_of_MIDI_standards)
 
 ### TODOs
 
 - 1
 - 2 
-
+- 3
 
