@@ -6,19 +6,29 @@
 
         <style>
             :host {
-                /* ... */
+
+                --fret-size: 30px;
+
+
             }
 
             .content-wrapper {
                 max-width: 100%;
                 box-sizing: border-box;
             }
+
+            .fretboard {
+
+            }
+
         </style>
 
 
         <div class="content-wrapper">
 
-            <h1>YARR!</h1>
+            <div class="fretboard"></div>
+
+            <h3>[[name]]</h3>
 
         </div>
 
@@ -30,16 +40,30 @@
         // https://github.com/Polymer/polymer#20-es6-class-based-syntax
         class TabChord extends Polymer.Element {
             static get is() { return 'tab-chord'; }
-            static get properties() { return { /* properties metadata */ } }
+
+            static get properties() {
+                return {
+                    name    : {
+                        type    : String,
+                        value   : '×',
+                    }
+                };
+            };
+
             static get observers() { return [ /* observer descriptors */ ] }
+
             constructor() {
                 super();
+
                 //...
             }
+
             connectedCallback() {
                 super.connectedCallback();
+
                 //...
             }
+
             //...
         }
 
