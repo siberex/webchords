@@ -68,14 +68,19 @@ Standard tuning GCEA:
 	Name	GCEA
 	------------
 	Am:		2000
-	Dm:		2210
-	Em:		0432	
-	C:		0003
 	Cm:		0333
+	Dm:		2210
+	Em:		0432
+	Fm:		1013
+	Gm:		0231
+	A:		2100
+	B:		4322
+	C:		0003
 	D:		2220
 	E:		4442
 	F:		2010
 	G:		0232
+	G7:		0212
 
 
 #### Tabulature notations
