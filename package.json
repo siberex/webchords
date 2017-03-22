@@ -21,6 +21,6 @@
   "author": "Sib.Li - Stepan Legachev",
   "license": "ISC",
   "dependencies": {
-    "webcomponents.js": "^0.7.24"
+    "webcomponents.js": "webcomponents/webcomponentsjs#v1.0.0-rc.6"
   }
 }
