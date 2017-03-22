@@ -45,17 +45,37 @@ Standard tuning GCEA:
 	G4	G#	A	A#	B	C	C#	D	D#	E	F	F#	G	G#	A	A#	B	C	C#
 
 
-#### Major Chords (Guide for Guitar Chord Charts) 
+#### Common chords tablatures (guitar)
 
-[link](https://en.wikipedia.org/wiki/Guitar_chord)
+	Name	EADGBE
+	--------------
+	Am:		x02210
+	Dm:		xx0231
+	Em:		022000
+	A:		x02220
+	B:		x24442	[barre]
+	C:		x32010
+	D:		xx0232
+	E:		022100
+	F:		133211	[barre]
+	G:		320003
+	F#:		244322
+	G7:		320001
+	
 
-	A: 002220
-	B: x24442
-	C: 032010
-	D: 000232
-	E: 022100
-	F: 133211
-	F#: 244322 (moveable - remember that no sharps or flats are between BC and EF) Normal G: 320001
+#### Common chords tablatures (ukulele)
+
+	Name	GCEA
+	------------
+	Am:		2000
+	Dm:		2210
+	Em:		0432	
+	C:		0003
+	Cm:		0333
+	D:		2220
+	E:		4442
+	F:		2010
+	G:		0232
 
 
 #### Tabulature notations
