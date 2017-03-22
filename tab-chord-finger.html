@@ -1,0 +1,112 @@
+<link rel="import" href="node_modules/@polymer/polymer/polymer-element.html">
+
+
+<dom-module id="tab-chord-finger">
+
+    <template>
+
+        <style>
+
+            :host {
+
+                --fret-size: 30px;
+                --fret-thickness: 1px;
+
+                --cell-size: calc( var(--fret-size) );
+
+                --dot-size: calc( var(--fret-size) * 0.9 );
+                --dot-margin: calc( (var(--fret-size) - var(--dot-size)) / 2 );
+
+            }
+
+            .note {
+                position: absolute;
+
+                background: #bbffff;
+
+                width: var(--dot-size);
+                height: var(--dot-size);
+                border-radius: calc( var(--dot-size) / 2 );
+
+                margin-top: var(--dot-margin);
+
+                text-align: center;
+            }
+
+        </style>
+
+
+        <div class="tab-chord-finger">
+            <div class="note"
+                 style="top: calc( var(--cell-size) * ([[fret]] - 1) );
+                        left: calc( var(--cell-size) * [[stringIndex]] - var(--cell-size) / 2 + 1px );">
+                <slot></slot>
+            </div>
+        </div>
+
+    </template>
+
+
+    <script>
+        // Extend Polymer.Element base class
+        // https://github.com/Polymer/polymer#20-es6-class-based-syntax
+        class TabChordFinger extends Polymer.Element {
+            static get is() { return 'tab-chord-finger'; }
+
+            static get properties() {
+                return {
+                    string  : {
+                        type    : Number,
+                        value   : null,
+                    },
+                    fret    : {
+                        type    : Number,
+                        value   : null,
+                    }
+                };
+            };
+
+            static get observers() { return [ /* observer descriptors */ ] }
+
+
+            constructor() {
+                super();
+
+                this.totalStrings = 6;
+
+                if ( this.hasAttribute('string') ) {
+                    this.string = this.getAttribute('string');
+                }
+                if ( this.hasAttribute('fret') ) {
+                    this.fret = this.getAttribute('fret');
+                }
+
+                if (!this.string || !this.fret) {
+                    this.style.display = 'none';
+                }
+
+                // Strings in string property are numerated from 1 to 6 (totalStrings)
+                // Finger can only press fret > 0
+                if (this.fret < 1 || this.string < 1 || this.string > this.totalStrings) {
+                    this.style.display = 'none';
+                }
+
+                this.stringIndex = this.totalStrings - this.string;
+
+
+            }
+
+            connectedCallback() {
+                super.connectedCallback();
+
+                //...
+            }
+
+            //...
+        }
+
+        // Register custom element definition using standard platform API
+        customElements.define(TabChordFinger.is, TabChordFinger);
+    </script>
+
+</dom-module>
