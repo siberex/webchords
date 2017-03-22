@@ -19,9 +19,9 @@
 
             }
 
-            .content-wrapper {
-                max-width: 100%;
-                box-sizing: border-box;
+            .tab-chord {
+                display: inline-block;
+                margin: 10px;
             }
 
             .fretboard-header {
@@ -39,7 +39,8 @@
             }
 
             h3.name {
-                width: var(--fretboard-width);
+                max-width: var(--fretboard-width);
+
                 font-family: Helvetica, sans-serif;
                 font-weight: 100;
                 text-align: center;
@@ -47,9 +48,11 @@
         </style>
 
 
-        <div class="content-wrapper">
+        <div class="tab-chord">
 
-            <div class="fretboard-header"></div>
+            <div class="fretboard-header">
+
+            </div>
 
             <div class="fretboard">
 
@@ -57,7 +60,7 @@
 
             </div>
 
-            <h3 class="name">[[name]] [[value]]</h3>
+            <h3 class="name">[[name]] <sub>[[value]]</sub></h3>
 
         </div>
 
@@ -116,7 +119,9 @@
                     this.name = '×'
                 }
                 if (null === this.value) {
-                    this.value = '××××××';
+                    this.value  = TabChord.chords[this.name]
+                                ? TabChord.chords[this.name]
+                                : '××××××';
                 }
 
 
