@@ -1,4 +1,6 @@
 <link rel="import" href="node_modules/@polymer/polymer/polymer-element.html">
+<link rel="import"  href="node_modules/@polymer/polymer/lib/elements/dom-repeat.html">
+
 
 <dom-module id="tab-chord">
 
@@ -51,9 +53,11 @@
 
             <div class="fretboard">
 
+
+
             </div>
 
-            <h3 class="name">[[name]]</h3>
+            <h3 class="name">[[name]] [[value]]</h3>
 
         </div>
 
@@ -70,17 +74,52 @@
                 return {
                     name    : {
                         type    : String,
-                        value   : '×',
+                        value   : null,
+                    },
+                    value   : {
+                        type    : String,
+                        value   : null
                     }
                 };
             };
 
             static get observers() { return [ /* observer descriptors */ ] }
 
+            static get chords() {
+                return {
+                     "Am"   : "x02210",
+                     "Dm"   : "xx0231",
+                     "Em"   : "022000",
+                     "A"    : "x02220",
+                     "B"    : "x24442",
+                     "C"    : "x32010",
+                     "D"    : "xx0232",
+                     "E"    : "022100",
+                     "F"    : "133211",
+                     "G"    : "320003",
+                     "F#"   : "244322",
+                     "G7"   : "320001"
+                }
+            } // chords getter
+
             constructor() {
                 super();
 
-                //...
+                if ( this.hasAttribute('name') ) {
+                    this.name = this.getAttribute('name');
+                }
+                if ( this.hasAttribute('value') ) {
+                    this.value = this.getAttribute('value');
+                }
+
+                if (null === this.name) {
+                    this.name = '×'
+                }
+                if (null === this.value) {
+                    this.value = '××××××';
+                }
+
+
             }
 
             connectedCallback() {
