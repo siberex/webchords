@@ -22,6 +22,10 @@
                 box-sizing: border-box;
             }
 
+            .fretboard-header {
+
+            }
+
             .fretboard {
                 width: var(--fretboard-width);
                 height: var(--fretboard-width);
@@ -32,14 +36,24 @@
                 background-size: var(--fret-size);
             }
 
+            h3.name {
+                width: var(--fretboard-width);
+                font-family: Helvetica, sans-serif;
+                font-weight: 100;
+                text-align: center;
+            }
         </style>
 
 
         <div class="content-wrapper">
 
-            <div class="fretboard"></div>
+            <div class="fretboard-header"></div>
 
-            <h3>[[name]]</h3>
+            <div class="fretboard">
+
+            </div>
+
+            <h3 class="name">[[name]]</h3>
 
         </div>
 
