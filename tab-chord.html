@@ -1,7 +1,7 @@
 <link rel="import" href="node_modules/@polymer/polymer/polymer-element.html">
 <link rel="import"  href="node_modules/@polymer/polymer/lib/elements/dom-repeat.html">
 
-<link rel="import"  href="tab-chord-finger.html">
+<link rel="import"  href="tab-chord-finger-pos.html">
 
 
 <dom-module id="tab-chord">
@@ -66,14 +66,14 @@
 
             <div class="fretboard">
 
-                <template is="dom-repeat" items="{{fingers}}">
-                    <p>[[item.string]]-[[item.fret]]</p>
-                    <tab-chord-finger string="[[item.string]]" fret="[[item.fret]]">[[item.value]]</tab-chord-finger>
+                <template is="dom-repeat" items="{{fingerPositions}}" as="pos">
+                    <tab-chord-finger-pos string="[[pos.string]]" fret$="[[pos.fret]]">[[pos.value]]</tab-chord-finger-pos>
                 </template>
 
-                <!--<tab-chord-finger string="1" fret="1">1</tab-chord-finger>-->
-                <!--<tab-chord-finger string="2" fret="3">3</tab-chord-finger>-->
-                <!--<tab-chord-finger string="3" fret="2">2</tab-chord-finger>-->
+
+                <!--<tab-chord-finger-pos string="1" fret="1">1</tab-chord-finger-pos>-->
+                <!--<tab-chord-finger-pos string="2" fret="3">3</tab-chord-finger-pos>-->
+                <!--<tab-chord-finger-pos string="3" fret="2">2</tab-chord-finger-pos>-->
 
             </div>
 
@@ -95,10 +95,12 @@
                     name    : {
                         type    : String,
                         value   : null,
+                        notify  : false
                     },
                     value   : {
                         type    : String,
-                        value   : null
+                        value   : null,
+                        notify  : false
                     }
                 };
             };
@@ -125,32 +127,40 @@
             constructor() {
                 super();
 
+                // The custom elements v1 specification forbids reading attributes, and accessing child or parent
+                // information from the DOM API from the constructor. Likewise, attributes and children cannot be added.
+                // You need to move any DOM work out the constructor.
+
                 this.totalStrings = 6;
 
-                if ( this.hasAttribute('name') ) {
-                    this.name = this.getAttribute('name');
-                }
-                if ( this.hasAttribute('value') ) {
-                    this.value = this.getAttribute('value');
-                }
+
+                this.testFret = 4;
+                this.testString = 4;
+
+            }
+
+            ready() {
+                super.ready();
+
 
                 if (null === this.name) {
                     this.name = '×'
                 }
 
                 if (null === this.value) {
-                    this.value  = TabChord.chords[this.name]
-                                ? TabChord.chords[this.name]
-                                : '××××××';
+                    this.value = TabChord.chords[this.name]
+                        ? TabChord.chords[this.name]
+                        : '××××××';
                 }
 
                 let notes = this.value.split('');
 
-                let fingers = [];
+                let fingerPositions = [];
+                let stringStates = [];
 
                 for (let i = 0; i < notes.length; i++) {
                     if (parseInt(notes[i]) > 0) {
-                        fingers.push({
+                        fingerPositions.push({
                             fret    : parseInt(notes[i]),
                             string  : this.totalStrings - i,
                             value   : 'I'
@@ -158,20 +168,26 @@
                     }
                 }
 
-                this.fingers = fingers;
-
-                console.log(fingers);
-
-
-
-
+                this.fingerPositions = fingerPositions;
+                //console.log(fingerPositions);
 
             }
+
 
             connectedCallback() {
                 super.connectedCallback();
 
-                //...
+                // If you have any code that relies on the element being layed out when the attached callback runs
+                // (for example, measuring the element or its children), it must wait until the layout is complete.
+
+                // Use the Polymer.RenderStatus.beforeNextRender function to register a one-time callback after layout
+                // is complete, but before the page is rendered (or "painted").
+
+                // 1st argument to beforeNextRender is used as the "this"
+                // value when the callback is invoked.
+                //Polymer.RenderStatus.beforeNextRender(this, function() {
+                    // measure something
+                //});
             }
 
             //...

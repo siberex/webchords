@@ -1,7 +1,7 @@
 <link rel="import" href="node_modules/@polymer/polymer/polymer-element.html">
 
 
-<dom-module id="tab-chord-finger">
+<dom-module id="tab-chord-finger-pos">
 
     <template>
 
@@ -19,7 +19,7 @@
 
             }
 
-            .tab-chord-finger {
+            .tab-chord-finger-pos {
                 position: absolute;
                 top: calc( var(--cell-size) * ([[fret]] - 1) );
                 left: calc( var(--cell-size) * [[stringIndex]] - var(--cell-size) / 2 + 1px );
@@ -38,7 +38,7 @@
         </style>
 
 
-        <div class="tab-chord-finger">
+        <div class="tab-chord-finger-pos">
             <slot></slot>
         </div>
 
@@ -48,18 +48,20 @@
     <script>
         // Extend Polymer.Element base class
         // https://github.com/Polymer/polymer#20-es6-class-based-syntax
-        class TabChordFinger extends Polymer.Element {
-            static get is() { return 'tab-chord-finger'; }
+        class TabChordFingerPosition extends Polymer.Element {
+            static get is() { return 'tab-chord-finger-pos'; }
 
             static get properties() {
                 return {
                     string  : {
                         type    : Number,
                         value   : null,
+                        notify  : false
                     },
                     fret    : {
                         type    : Number,
                         value   : null,
+                        notify  : false
                     }
                 };
             };
@@ -67,44 +69,56 @@
             static get observers() { return [ /* observer descriptors */ ] }
 
 
+
             constructor() {
                 super();
 
+                // The custom elements v1 specification forbids reading attributes, and accessing child or parent
+                // information from the DOM API from the constructor. Likewise, attributes and children cannot be added.
+                // You need to move any DOM work out the constructor.
+
+
+
+
+                //console.log(this.getAttribute('string'), this.getAttribute('fret'), '?a');
+
                 this.totalStrings = 6;
 
-                if ( this.hasAttribute('string') ) {
-                    this.string = this.getAttribute('string');
-                }
-                if ( this.hasAttribute('fret') ) {
-                    this.fret = this.getAttribute('fret');
-                }
+
+            }
+
+
+            ready() {
+                super.ready();
+
+
+                console.log(this.myString, this.myFret, '?');
+
 
                 if (!this.string || !this.fret) {
-                    this.style.display = 'none';
+                    //this.style.display = 'none';
                 }
 
                 // Strings in string property are numerated from 1 to 6 (totalStrings)
                 // Finger can only press fret > 0
                 if (this.fret < 1 || this.string < 1 || this.string > this.totalStrings) {
-                    this.style.display = 'none';
+                    //this.style.display = 'none';
                 }
 
                 this.stringIndex = this.totalStrings - this.string;
 
-
             }
+
 
             connectedCallback() {
                 super.connectedCallback();
-
-                //...
+                // actions on attached...
             }
 
-            //...
         }
 
         // Register custom element definition using standard platform API
-        customElements.define(TabChordFinger.is, TabChordFinger);
+        customElements.define(TabChordFingerPosition.is, TabChordFingerPosition);
     </script>
 
 </dom-module>
