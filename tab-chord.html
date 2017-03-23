@@ -66,9 +66,14 @@
 
             <div class="fretboard">
 
-                <tab-chord-finger string="1" fret="1">1</tab-chord-finger>
-                <tab-chord-finger string="2" fret="3">3</tab-chord-finger>
-                <tab-chord-finger string="3" fret="2">2</tab-chord-finger>
+                <template is="dom-repeat" items="{{fingers}}">
+                    <p>[[item.string]]-[[item.fret]]</p>
+                    <tab-chord-finger string="[[item.string]]" fret="[[item.fret]]">[[item.value]]</tab-chord-finger>
+                </template>
+
+                <!--<tab-chord-finger string="1" fret="1">1</tab-chord-finger>-->
+                <!--<tab-chord-finger string="2" fret="3">3</tab-chord-finger>-->
+                <!--<tab-chord-finger string="3" fret="2">2</tab-chord-finger>-->
 
             </div>
 
@@ -120,6 +125,8 @@
             constructor() {
                 super();
 
+                this.totalStrings = 6;
+
                 if ( this.hasAttribute('name') ) {
                     this.name = this.getAttribute('name');
                 }
@@ -130,11 +137,33 @@
                 if (null === this.name) {
                     this.name = '×'
                 }
+
                 if (null === this.value) {
                     this.value  = TabChord.chords[this.name]
                                 ? TabChord.chords[this.name]
                                 : '××××××';
                 }
+
+                let notes = this.value.split('');
+
+                let fingers = [];
+
+                for (let i = 0; i < notes.length; i++) {
+                    if (parseInt(notes[i]) > 0) {
+                        fingers.push({
+                            fret    : parseInt(notes[i]),
+                            string  : this.totalStrings - i,
+                            value   : 'I'
+                        });
+                    }
+                }
+
+                this.fingers = fingers;
+
+                console.log(fingers);
+
+
+
 
 
             }
