@@ -93,13 +93,7 @@
                 // information from the DOM API from the constructor. Likewise, attributes and children cannot be added.
                 // You need to move any DOM work out the constructor.
 
-
-
-
-                //console.log(this.getAttribute('string'), this.getAttribute('fret'), '?a');
-
                 this.totalStrings = 6;
-
 
             }
 
@@ -107,18 +101,14 @@
             ready() {
                 super.ready();
 
-
-                console.log(this.myString, this.myFret, '?');
-
-
                 if (!this.string || !this.fret) {
-                    //this.style.display = 'none';
+                    this.style.display = 'none';
                 }
 
                 // Strings in string property are numerated from 1 to 6 (totalStrings)
                 // Finger can only press fret > 0
                 if (this.fret < 1 || this.string < 1 || this.string > this.totalStrings) {
-                    //this.style.display = 'none';
+                    this.style.display = 'none';
                 }
 
                 this.stringIndex = this.totalStrings - this.string;
