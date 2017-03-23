@@ -19,8 +19,10 @@
 
             }
 
-            .note {
+            .tab-chord-finger {
                 position: absolute;
+                top: calc( var(--cell-size) * ([[fret]] - 1) );
+                left: calc( var(--cell-size) * [[stringIndex]] - var(--cell-size) / 2 + 1px );
 
                 background: #bbffff;
 
@@ -37,11 +39,7 @@
 
 
         <div class="tab-chord-finger">
-            <div class="note"
-                 style="top: calc( var(--cell-size) * ([[fret]] - 1) );
-                        left: calc( var(--cell-size) * [[stringIndex]] - var(--cell-size) / 2 + 1px );">
-                <slot></slot>
-            </div>
+            <slot></slot>
         </div>
 
     </template>
