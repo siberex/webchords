@@ -20,10 +20,10 @@
                 --fret-color: #777;
 
                 --num-strings: 6;
-                --num-frets: 5;
+                --num-frets: 4;
 
                 --fretboard-width: calc( var(--string-distance) * (var(--num-strings) - 1) + var(--string-thickness) );
-                --fretboard-height: calc( var(--fret-distance) * var(--num-frets) + var(--fret-thickness) );
+                --fretboard-height: calc( var(--fret-distance) * var(--num-frets) );
 
             }
 
@@ -34,6 +34,10 @@
 
             .fretboard-header {
 
+                max-width: var(--fretboard-width);
+
+                border-bottom: 2px solid black;
+                margin-bottom: 1px;
             }
 
             .fretboard-header > .state {
@@ -85,6 +89,8 @@
                 <!--<tab-chord-finger-pos string="3" fret="2">2</tab-chord-finger-pos>-->
 
             </div>
+
+            <div class="starting-fret-num"></div>
 
             <h3 class="name">[[name]] <sub>[[value]]</sub></h3>
 
@@ -162,6 +168,9 @@
 
                 let fingerPositions = [];
                 let stringStates = [];
+
+                let stateOpen = '❍';
+                let stateUnused = '✕';
 
                 for (let i = 0; i < notes.length; i++) {
                     if (parseInt(notes[i]) > 0) {
