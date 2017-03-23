@@ -9,28 +9,33 @@
 
             :host {
 
-                --fret-size: 30px;
-                --fret-thickness: 1px;
+                --string-distance: 30px;
+                --string-thickness: 1px;
 
-                --cell-size: calc( var(--fret-size) );
+                --fret-distance: 40px;
+                --fret-thickness: 2px;
 
-                --dot-size: calc( var(--fret-size) * 0.9 );
-                --dot-margin: calc( (var(--fret-size) - var(--dot-size)) / 2 );
+                /*--fret-size: 30px;*/
+
+
+                --dot-size: calc( var(--string-distance) * 0.9 );
+                --dot-margin-top: calc( (var(--fret-distance) - var(--dot-size)) / 2 );
 
             }
 
             .tab-chord-finger-pos {
                 position: absolute;
-                top: calc( var(--cell-size) * ([[fret]] - 1) );
-                left: calc( var(--cell-size) * [[stringIndex]] - var(--cell-size) / 2 + 1px );
+                top: calc( var(--fret-distance) * ([[fret]] - 1) );
+                left: calc( var(--string-distance) * [[stringIndex]] - var(--string-distance) / 2 + 1px );
 
-                background: #bbffff;
+                background: white;
+                border: 1px solid black;
 
                 width: var(--dot-size);
                 height: var(--dot-size);
                 border-radius: calc( var(--dot-size) / 2 );
 
-                margin-top: var(--dot-margin);
+                margin-top: var(--dot-margin-top);
 
                 text-align: center;
             }
