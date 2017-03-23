@@ -25,6 +25,6 @@
   "dependencies": {
     "@polymer/polymer": "Polymer/polymer#v2.0.0-rc.3",
     "@webcomponents/shadycss": "github:webcomponents/shadycss",
-    "webcomponents.js": "webcomponents/webcomponentsjs#v1.0.0-rc.6"
+    "webcomponents.js": "webcomponents/webcomponentsjs#v1.0.0-rc.7"
   }
 }
