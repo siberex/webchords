@@ -89,7 +89,7 @@
 
             <div class="fretboard">
 
-                <template is="dom-repeat" items="{{fingerPositions}}" as="pos">
+                <template is="dom-repeat" items="[[fingerPositions]]" as="pos">
                     <tab-chord-finger-pos string="[[pos.string]]" fret$="[[pos.fret]]">[[pos.value]]</tab-chord-finger-pos>
                 </template>
 
