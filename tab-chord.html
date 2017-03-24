@@ -33,6 +33,9 @@
             }
 
             .fretboard-header {
+                position: relative;
+
+                min-height: 20px;
 
                 max-width: var(--fretboard-width);
 
@@ -41,7 +44,13 @@
             }
 
             .fretboard-header > .state {
-                display: inline-block;
+                /*display: inline-block;*/
+                position: absolute;
+                width: var(--string-distance);
+                top: 0;
+
+                margin-left: calc( var(--string-distance) / -2 );
+                text-align: center;
             }
 
             .fretboard {
@@ -84,7 +93,9 @@
         <div class="tab-chord">
 
             <div class="fretboard-header">
-
+                <template is="dom-repeat" items="[[stringStates]]" as="str">
+                    <div class="state" style="left: calc([[str.index]] * var(--string-distance));">[[str.state]]</div>
+                </template>
             </div>
 
             <div class="fretboard">
@@ -180,7 +191,7 @@
                 let stringStates = [];
 
                 let stateOpen = '❍';
-                let stateUnused = '✕';
+                let stateMuted = '✕';
 
                 for (let i = 0; i < notes.length; i++) {
                     if (parseInt(notes[i]) > 0) {
@@ -190,11 +201,18 @@
                             value   : '×'
                         });
                     } else {
-
+                        let isMuted = /[×xX*]/.test(notes[i]);
+                        stringStates.push({
+                            string  : this.totalStrings - i,
+                            index   : i,
+                            muted   : isMuted,
+                            state   : isMuted ? stateMuted : stateOpen
+                        });
                     }
                 }
 
                 this.fingerPositions = fingerPositions;
+                this.stringStates = stringStates;
                 //console.log(fingerPositions);
 
             }
