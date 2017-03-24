@@ -15,7 +15,7 @@
                 --fret-distance: 40px;
                 --fret-thickness: 2px;
 
-                --dot-size: calc( var(--string-distance) * 0.1 );
+                --dot-size: calc( var(--string-distance) * 0.65 );
 
                 --dot-margin-left: calc( var(--dot-size) / -2 - 1px );
 
@@ -26,12 +26,12 @@
             .tab-chord-finger-pos {
 
                 position: absolute;
-                top: calc( var(--fret-distance) * ([[fret]] - 1) );
+                top: calc( var(--fret-distance) * ([[fret]] - 1) + var(--dot-margin-top) );
                 /*left: calc( var(--string-distance) * [[stringIndex]] - var(--string-distance) / 2 + 1px );*/
                 /*left: calc( var(--string-distance) * [[stringIndex]] - var(--dot-size) / 2 );*/
-                left: calc( var(--string-distance) * ([[stringIndex]]) );
+                left: calc( var(--string-distance) * ([[stringIndex]]) + var(--dot-margin-left) );
 
-                background: #eee;
+                background: #555;
                 border: 1px solid black;
 
                 width: var(--dot-size);
@@ -40,10 +40,11 @@
 
                 line-height: var(--dot-size);
 
-                margin-top: var(--dot-margin-top);
-                margin-left: var(--dot-margin-left);
+                /*margin-top: var(--dot-margin-top);*/
+                /*margin-left: var(--dot-margin-left);*/
 
                 text-align: center;
+                overflow: hidden;
             }
 
             .caption {
