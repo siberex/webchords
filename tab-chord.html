@@ -47,10 +47,16 @@
                 /*display: inline-block;*/
                 position: absolute;
                 width: var(--string-distance);
-                top: 0;
+                bottom: 0;
 
                 margin-left: calc( var(--string-distance) / -2 );
                 text-align: center;
+
+                font-family: Helvetica, sans-serif;
+                font-weight: 100;
+
+                font-size: 15px;
+                color: black;
             }
 
             .fretboard {
@@ -190,9 +196,6 @@
                 let fingerPositions = [];
                 let stringStates = [];
 
-                let stateOpen = '❍';
-                let stateMuted = '✕';
-
                 for (let i = 0; i < notes.length; i++) {
                     if (parseInt(notes[i]) > 0) {
                         fingerPositions.push({
@@ -206,7 +209,9 @@
                             string  : this.totalStrings - i,
                             index   : i,
                             muted   : isMuted,
-                            state   : isMuted ? stateMuted : stateOpen
+                            //state   : isMuted ? 'x' : 'o'
+                            //state   : isMuted ? '✕' : '❍'
+                            state   : isMuted ? '❌' : '⭕️'
                         });
                     }
                 }
