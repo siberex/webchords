@@ -86,6 +86,21 @@
                 margin-bottom: 0;
             }
 
+            h6.fingering,
+            h6.fingering.teen {
+                max-width: var(--fretboard-width);
+
+                font-family: Helvetica, sans-serif;
+                font-weight: 100;
+                text-align: center;
+
+                font-size: 14px;
+                color: #777;
+
+                margin-top: 0;
+                margin-bottom: 0;
+            }
+
             tab-chord-finger-pos {
 
                 /*--string-distance: var(--string-distance);*/
@@ -121,8 +136,8 @@
 
             <div class="starting-fret-num"></div>
 
-            <h3 class="name">[[name]] <sub>[[value]]</sub></h3>
-
+            <h3 class="name">[[name]]</h3>
+            <h6 class="fingering">[[value]]</h6>
         </div>
 
     </template>
