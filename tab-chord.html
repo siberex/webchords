@@ -117,7 +117,7 @@
 
             <div class="fretboard-header">
                 <template is="dom-repeat" items="[[stringStates]]" as="str">
-                    <div class="state" style="left: calc([[str.index]] * var(--string-distance));">[[str.state]]</div>
+                    <div class="state" style="left: calc([[str.stri]] * var(--string-distance));">[[str.state]]</div>
                 </template>
             </div>
 
@@ -235,7 +235,7 @@
                     if (parseInt(notes[i]) > 0) {
                         fingerPositions.push({
                             fret    : parseInt(notes[i]),
-                            index   : i,
+                            stri    : i,
                             string  : this.totalStrings - i,
                             value   : '?'
                         });
@@ -243,7 +243,7 @@
                         let isMuted = /[×xX*]/.test(notes[i]);
                         stringStates.push({
                             string  : this.totalStrings - i,
-                            index   : i,
+                            stri    : i,
                             muted   : isMuted,
                             //state   : isMuted ? 'x' : 'o'
                             state   : isMuted ? '✕' : '❍'
@@ -256,11 +256,28 @@
 
                 // Sort positions from the top of fretboard to the bottom and from the left of fretboard to the right
                 //fingerPositions = fingerPositions.sort((a, b) => (a.fret - b.fret));
-                fingerPositions = fingerPositions.sort((a, b) => (a.fret == b.fret ? a.index - b.index : a.fret - b.fret));
+                fingerPositions = fingerPositions.sort((a, b) => (a.fret === b.fret ? a.stri - b.stri : a.fret - b.fret));
+
+                if (!fingerPositions.length) {
+                    return;
+                }
+
+                let topmostFret = fingerPositions[0].fret;
+
+                let probableBarrePositions = fingerPositions.filter(fingerPos => fingerPos.fret === topmostFret);
+
+                // Check if positions are touching right side of the fretboard
+                if (probableBarrePositions.length
+                        && probableBarrePositions[probableBarrePositions.length - 1].string == 1) {
+                    // barre detected
+
+                    console.log('Barre!', this.name);
+                }
 
                 if (this.name == 'Fm') {
-                    console.log(fingerPositions);
+                    //console.log(probableBarrePositions);
                 }
+
 
 
                 let finger = 1;
@@ -272,7 +289,7 @@
                     }
 
                     // First finger placement
-                    if (pos == 0) {
+                    if (pos === 0) {
                         fingerPositions[pos].value = finger;
                         continue;
                     }
@@ -281,10 +298,13 @@
                     let prevPos = pos > 0 ? fingerPositions[pos - 1] : null;
 
                     // Barre check: More than one finger on the topmost fret
-                    if (prevPos && currPos.fret == prevPos.fret && fingerPositions[0].fret == currPos.fret) {
+                    if (prevPos && currPos.fret === prevPos.fret && fingerPositions[0].fret === currPos.fret) {
 
                         fingerPositions[pos].value = finger;
                         continue;
+
+                        // @fixme Use barre only if positions are touching right side of the fretboard
+
                     }
 
                     finger++;
