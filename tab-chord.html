@@ -217,6 +217,7 @@
                     if (parseInt(notes[i]) > 0) {
                         fingerPositions.push({
                             fret    : parseInt(notes[i]),
+                            index   : i,
                             string  : this.totalStrings - i,
                             value   : 'N'
                         });
@@ -234,7 +235,8 @@
                     }
                 }
 
-                fingerPositions = fingerPositions.sort((a, b) => (a.fret - b.fret));
+                //fingerPositions = fingerPositions.sort((a, b) => (a.fret - b.fret));
+                fingerPositions = fingerPositions.sort((a, b) => (a.fret == b.fret ? a.index - b.index : a.fret - b.fret));
 
 
 
