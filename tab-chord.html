@@ -199,7 +199,7 @@
 
 
                 if (null === this.name) {
-                    this.name = '×'
+                    this.name = '?'
                 }
 
                 if (null === this.value) {
@@ -218,7 +218,7 @@
                         fingerPositions.push({
                             fret    : parseInt(notes[i]),
                             string  : this.totalStrings - i,
-                            value   : '×'
+                            value   : 'N'
                         });
                     } else {
                         let isMuted = /[×xX*]/.test(notes[i]);
@@ -233,6 +233,11 @@
                         });
                     }
                 }
+
+                fingerPositions = fingerPositions.sort((a, b) => (a.fret - b.fret));
+
+
+
 
                 this.fingerPositions = fingerPositions;
                 this.stringStates = stringStates;
