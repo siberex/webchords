@@ -235,8 +235,8 @@
                     if (parseInt(notes[i]) > 0) {
                         fingerPositions.push({
                             fret    : parseInt(notes[i]),
-                            stri    : i,
                             string  : this.totalStrings - i,
+                            stri    : i,
                             value   : '?'
                         });
                     } else {
@@ -258,29 +258,54 @@
                 //fingerPositions = fingerPositions.sort((a, b) => (a.fret - b.fret));
                 fingerPositions = fingerPositions.sort((a, b) => (a.fret === b.fret ? a.stri - b.stri : a.fret - b.fret));
 
+                // Save position index inside for later use
+                for (let pos = 0; pos < fingerPositions.length; pos++) {
+                    fingerPositions[pos].pos = pos;
+                }
+
                 if (!fingerPositions.length) {
                     return;
                 }
 
-                let topmostFret = fingerPositions[0].fret;
 
+                // Detect Barre
+                let finger = 1;
+
+                let topmostFret = fingerPositions[0].fret;
                 let probableBarrePositions = fingerPositions.filter(fingerPos => fingerPos.fret === topmostFret);
 
                 // Check if positions are touching right side of the fretboard
                 if (probableBarrePositions.length
                         && probableBarrePositions[probableBarrePositions.length - 1].string == 1) {
-                    // barre detected
 
-                    console.log('Barre!', this.name);
+                    // Barre detected
+
+                    // Check if probable barre positions contain only two fingers separated by one string
+                    if (probableBarrePositions.length == 2
+                            && (probableBarrePositions[0].string - probableBarrePositions[0].string) == 2) {
+                        // Not a barre
+                        probableBarrePositions = [];
+
+                        console.log('Probable, but not barre:', this.name);
+                    } else {
+                        console.log('Barre:', this.name);
+                    }
+
+                } else {
+                    probableBarrePositions = [];
                 }
 
-                if (this.name == 'Fm') {
-                    //console.log(probableBarrePositions);
+
+                for (let pos = 0; pos < probableBarrePositions.length; pos++) {
+                    let barrePosition = probableBarrePositions[pos].pos;
+                    fingerPositions[barrePosition].value = finger;
                 }
 
+                if (probableBarrePositions.length) {
+                    finger++;
+                }
 
-
-                let finger = 1;
+                // Place other finger values (except barre values which are already set)
                 for (let pos = 0; pos < fingerPositions.length; pos++) {
 
                     // Sanity check: More than 4 fingers used in one chord is impossible combination (for humans)
@@ -288,27 +313,28 @@
                         continue;
                     }
 
-                    // First finger placement
-                    if (pos === 0) {
-                        fingerPositions[pos].value = finger;
+                    // Value already defined, skip
+                    if (fingerPositions[pos].value && fingerPositions[pos].value !== '?') {
                         continue;
                     }
+
+                    // First finger placement
+                    //if (pos === 0) {
+                    //    fingerPositions[pos].value = finger;
+                    //    continue;
+                    //}
 
                     let currPos = fingerPositions[pos];
                     let prevPos = pos > 0 ? fingerPositions[pos - 1] : null;
 
                     // Barre check: More than one finger on the topmost fret
-                    if (prevPos && currPos.fret === prevPos.fret && fingerPositions[0].fret === currPos.fret) {
+                    //if (prevPos && currPos.fret === prevPos.fret && fingerPositions[0].fret === currPos.fret) {
+                    //    fingerPositions[pos].value = finger;
+                    //    continue;
+                    //}
 
-                        fingerPositions[pos].value = finger;
-                        continue;
-
-                        // @fixme Use barre only if positions are touching right side of the fretboard
-
-                    }
-
-                    finger++;
                     fingerPositions[pos].value = finger;
+                    finger++;
 
                 }
 
