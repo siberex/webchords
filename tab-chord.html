@@ -219,7 +219,7 @@
                             fret    : parseInt(notes[i]),
                             index   : i,
                             string  : this.totalStrings - i,
-                            value   : 'N'
+                            value   : '?'
                         });
                     } else {
                         let isMuted = /[×xX*]/.test(notes[i]);
@@ -235,10 +235,32 @@
                     }
                 }
 
+
+                // Sort positions from the top of fretboard to the bottom and from the left of fretboard to the right
                 //fingerPositions = fingerPositions.sort((a, b) => (a.fret - b.fret));
                 fingerPositions = fingerPositions.sort((a, b) => (a.fret == b.fret ? a.index - b.index : a.fret - b.fret));
 
+                let finger = 1;
+                for (let pos = 0; pos < fingerPositions.length; pos++) {
 
+                    if (finger > 4) {
+                        continue;
+                    }
+
+                    let currPos = fingerPositions[pos];
+                    let prevPos = pos > 0 ? fingerPositions[pos - 1] : null;
+
+                    // More than one finger on the topmost fret → probably barre
+                    if (prevPos && currPos.fret == prevPos.fret && fingerPositions[0].fret == currPos.fret) {
+
+                        fingerPositions[pos].value = finger;
+                        continue;
+                    }
+
+                    fingerPositions[pos].value = finger;
+                    finger++;
+
+                }
 
 
                 this.fingerPositions = fingerPositions;
