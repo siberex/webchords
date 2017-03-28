@@ -258,25 +258,37 @@
                 //fingerPositions = fingerPositions.sort((a, b) => (a.fret - b.fret));
                 fingerPositions = fingerPositions.sort((a, b) => (a.fret == b.fret ? a.index - b.index : a.fret - b.fret));
 
+                if (this.name == 'Fm') {
+                    console.log(fingerPositions);
+                }
+
+
                 let finger = 1;
                 for (let pos = 0; pos < fingerPositions.length; pos++) {
 
+                    // Sanity check: More than 4 fingers used in one chord is impossible combination (for humans)
                     if (finger > 4) {
+                        continue;
+                    }
+
+                    // First finger placement
+                    if (pos == 0) {
+                        fingerPositions[pos].value = finger;
                         continue;
                     }
 
                     let currPos = fingerPositions[pos];
                     let prevPos = pos > 0 ? fingerPositions[pos - 1] : null;
 
-                    // More than one finger on the topmost fret → probably barre
+                    // Barre check: More than one finger on the topmost fret
                     if (prevPos && currPos.fret == prevPos.fret && fingerPositions[0].fret == currPos.fret) {
 
                         fingerPositions[pos].value = finger;
                         continue;
                     }
 
-                    fingerPositions[pos].value = finger;
                     finger++;
+                    fingerPositions[pos].value = finger;
 
                 }
 
