@@ -83,6 +83,15 @@ Standard tuning GCEA:
 	G7:		0212
 
 
+#### Chords theory
+
+- [Chords explained](http://www.ukuleletricks.com/major-minor-diminished-augmented-chords-explained/)
+
+- [Theory behind the chords](http://www.pianoscales.org/chords.html)
+
+- [Diminished and augmented chords](https://www.thoughtco.com/what-are-diminished-and-augmented-triads-2456547)
+
+
 #### Tabulature notations
 
 - [ASCII_tab](https://en.wikipedia.org/wiki/ASCII_tab)
