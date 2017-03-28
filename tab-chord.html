@@ -275,6 +275,7 @@
                 let probableBarrePositions = fingerPositions.filter(fingerPos => fingerPos.fret === topmostFret);
 
                 // Check if positions are touching right side of the fretboard
+                // @fixme Check G# major chord, which have a barre on [2,3,4] strings because 1st string is fretted with 4th finger
                 if (probableBarrePositions.length
                         && probableBarrePositions[probableBarrePositions.length - 1].string == 1) {
 
