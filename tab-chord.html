@@ -278,12 +278,16 @@
                 if (probableBarrePositions.length
                         && probableBarrePositions[probableBarrePositions.length - 1].string == 1) {
 
-                    // Barre detected
+                    // Probably barre detected
 
-                    // Check if probable barre positions contain only two fingers separated by one string
-                    if (probableBarrePositions.length == 2
+                    if (probableBarrePositions.length == 1) {
+                        // Eliminating one-finger positions
+                        probableBarrePositions = [];
+                    } else if (probableBarrePositions.length == 2
                             && (probableBarrePositions[0].string - probableBarrePositions[1].string) == 2) {
-                        // Not a barre
+
+                        // Not a barre: probable positions contain only two fingers separated by one string
+
                         probableBarrePositions = [];
 
                         console.log('Probable, but not barre:', this.name);
@@ -299,6 +303,7 @@
                 for (let pos = 0; pos < probableBarrePositions.length; pos++) {
                     let barrePosition = probableBarrePositions[pos].pos;
                     fingerPositions[barrePosition].value = finger;
+                    fingerPositions[barrePosition].barre = true;
                 }
 
                 if (probableBarrePositions.length) {
