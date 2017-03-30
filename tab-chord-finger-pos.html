@@ -35,6 +35,7 @@
                 border: 1px solid black;
 
                 width: var(--dot-size);
+                /*width: calc( var(--dot-size) * 3 );*/
                 height: var(--dot-size);
                 border-radius: calc( var(--dot-size) / 2 );
 
@@ -45,6 +46,10 @@
 
                 text-align: center;
                 overflow: hidden;
+            }
+
+            .tab-chord-finger-pos.barre {
+
             }
 
             .caption {
@@ -85,6 +90,16 @@
                         type    : Number,
                         value   : null,
                         notify  : false
+                    },
+                    stringFrom  : {
+                        type    : Number,
+                        value   : null,
+                        notify  : false
+                    },
+                    stringTo    : {
+                        type    : Number,
+                        value   : null,
+                        notify  : false
                     }
                 };
             };
@@ -108,14 +123,29 @@
             ready() {
                 super.ready();
 
-                if (!this.string || !this.fret) {
+                // Fingers can only press frets > 0
+                if (!this.fret || this.fret < 1) {
                     this.style.display = 'none';
                 }
 
-                // Strings in string property are numerated from 1 to 6 (totalStrings)
-                // Finger can only press fret > 0
-                if (this.fret < 1 || this.string < 1 || this.string > this.totalStrings) {
+                // Should be present either string property or both string-from and string-to
+                if ( !( this.string || (this.stringFrom && this.stringTo) ) ) {
                     this.style.display = 'none';
+                }
+
+                // Strings are numerated from 1 to totalStrings, other values are wrong
+                if ( this.string ) {
+                    if (this.string < 1 || this.string > this.totalStrings) {
+                        this.style.display = 'none';
+                    }
+                } else {
+                    this.barre = true;
+
+                    if (this.stringFrom > this.stringTo) {
+                        this.style.display = 'none';
+                    } else if (this.stringFrom  < 1 || this.stringTo > this.totalStrings) {
+                        this.style.display = 'none';
+                    }
                 }
 
                 this.stringIndex = this.totalStrings - this.string;
