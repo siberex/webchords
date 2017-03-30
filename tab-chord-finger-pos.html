@@ -86,6 +86,11 @@
                         value   : null,
                         notify  : false
                     },
+                    strings : {
+                        type    : Number,
+                        value   : null,
+                        notify  : false
+                    },
                     fret    : {
                         type    : Number,
                         value   : null,
@@ -155,10 +160,8 @@
 
 
                 } else {
-                    this.disable('string attribute contains unsupported value');
+                    this.disable('string attribute have unsupported type');
                 }
-
-
 
             }
 
