@@ -239,6 +239,7 @@
                 let fingerPositions = [];
                 let stringStates = [];
 
+                // Fill fingerPositions (fretted strings) and stringStates (not fretted strings)
                 for (let i = 0; i < notes.length; i++) {
                     if (parseInt(notes[i]) > 0) {
                         fingerPositions.push({
@@ -261,22 +262,21 @@
                     }
                 }
 
-
-                // Sort positions from the top of fretboard to the bottom and from the left of fretboard to the right
-                //fingerPositions = fingerPositions.sort((a, b) => (a.fret - b.fret));
-                fingerPositions = fingerPositions.sort((a, b) => (a.fret === b.fret ? a.stri - b.stri : a.fret - b.fret));
-
-                // Save position index inside for later use
-                for (let pos = 0; pos < fingerPositions.length; pos++) {
-                    fingerPositions[pos].pos = pos;
-                }
-
+                // Sanity check
                 if (!fingerPositions.length) {
                     return;
                 }
 
+                // Sort positions from the top of fretboard to the bottom and from the left of fretboard to the right
+                fingerPositions = fingerPositions.sort((a, b) => (a.fret === b.fret ? a.stri - b.stri : a.fret - b.fret));
 
-                // Detect Barre
+                // Save position index as fingerPositions item property for later reference
+                for (let pos = 0; pos < fingerPositions.length; pos++) {
+                    fingerPositions[pos].pos = pos;
+                }
+
+
+                // Detect barre chords
                 let finger = 1;
 
                 let topmostFret = fingerPositions[0].fret;
