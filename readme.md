@@ -12,9 +12,15 @@ Web component for guitar chords display on any web page.
 
 ### Usage
 
-...
+```html
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/webcomponentsjs/1.0.0-rc.7/webcomponents-loader.js"></script>
+    <link rel="import" href="webchords/tab-chord.html">
 
-
+    <tab-chord name="Am"></tab-chord>
+    <tab-chord name="E"></tab-chord>
+    <tab-chord name="Dm/A" value="×00231"></tab-chord>
+    <tab-chord name="D6²" value="×x0432"></tab-chord>
+```
 
 
 
