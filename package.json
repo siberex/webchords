@@ -35,6 +35,9 @@
     "test": "test"
   },
   "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-eslint": "^3.0.1",
+    "gulp-if": "^2.0.1",
     "web-component-tester": "Polymer/web-component-tester#v6.0.0-prerelease.7"
   }
 }
