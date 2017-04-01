@@ -1,5 +1,10 @@
 
 
+### Features
+
+- Barre display support
+
+
 ### Compatibility issues
 
 - Add Babel for ES6 classes and syntax
