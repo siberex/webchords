@@ -10,6 +10,17 @@ Web component for guitar chords display on any web page.
 → [https://siberex.github.io/webchords/](https://siberex.github.io/webchords/)
 
 
+### Installation
+
+With npm:
+ 
+	npm install siberex/webchords 
+
+With bower:
+
+	bower install siberex/webchords
+
+
 ### Usage
 
 ```html
