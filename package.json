@@ -1,12 +1,13 @@
 {
   "name": "webchords",
   "version": "0.0.1",
-  "description": "Web components for music notation, guitar chords, tabs and stuff",
-  "main": "index.html",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
+  "description": "Web components for music notation, guitar chords, tablatures and stuff",
+  "main": "tab-chord.html",
+  "author": "Sib.Li - Stepan Legachev <guitar@sib.li>",
+  "license": "MIT",
   "keywords": [
+    "web-components",
+    "polymer",
     "music",
     "musical",
     "notation",
@@ -24,8 +25,6 @@
     "type": "git",
     "url": "https://github.com/siberex/webchords.git"
   },
-  "author": "Sib.Li - Stepan Legachev",
-  "license": "ISC",
   "dependencies": {
     "polymer": "Polymer/polymer#v2.0.0-rc.3",
     "shadycss": "webcomponents/shadycss#v1.0.0-rc.2",
@@ -39,5 +38,8 @@
     "gulp-eslint": "^3.0.1",
     "gulp-if": "^2.0.1",
     "web-component-tester": "Polymer/web-component-tester#v6.0.0-prerelease.7"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
   }
 }
