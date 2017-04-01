@@ -1,8 +1,8 @@
 {
-  "name": "webcomponent-musical-notation",
-  "version": "1.0.0",
-  "description": "Web components for music notation, guitar tabs and stuff",
-  "main": "index.js",
+  "name": "siberex/webchords",
+  "version": "0.0.1",
+  "description": "Web components for music notation, guitar chords, tabs and stuff",
+  "main": "index.html",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -20,6 +20,10 @@
     "sheet",
     "cdefgab"
   ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/siberex/webchords.git"
+  },
   "author": "Sib.Li - Stepan Legachev",
   "license": "ISC",
   "dependencies": {
