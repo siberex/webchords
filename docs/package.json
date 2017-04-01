@@ -1,0 +1,34 @@
+{
+  "name": "webchords-demo",
+  "version": "1.0.0",
+  "description": "Guitar chords web component demo for GitHub Pages",
+  "main": "index.html",
+  "author": "Sib.Li - Stepan Legachev <guitar@sib.li>",
+  "license": "MIT",
+  "keywords": [
+    "web-components",
+    "polymer",
+    "music",
+    "musical",
+    "notation",
+    "sheet",
+    "note",
+    "chord",
+    "tablature",
+    "tabulature",
+    "tabs",
+    "clef",
+    "sheet",
+    "cdefgab"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/siberex/webchords.git"
+  },
+  "dependencies": {
+    "webchords": "github:siberex/webchords"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  }
+}
