@@ -25,6 +25,10 @@
     "type": "git",
     "url": "https://github.com/siberex/webchords.git"
   },
+  "bugs": {
+    "url": "https://github.com/siberex/webchords/issues"
+  },
+  "homepage": "https://siberex.github.io/webchords/",
   "dependencies": {
     "polymer": "Polymer/polymer#v2.0.0-rc.3",
     "shadycss": "webcomponents/shadycss#v1.0.0-rc.2",
