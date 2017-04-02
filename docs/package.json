@@ -1,6 +1,7 @@
 {
   "name": "webchords-demo",
   "version": "1.0.0",
+  "private": true,
   "description": "Guitar chords web component demo for GitHub Pages",
   "main": "index.html",
   "author": "Sib.Li - Stepan Legachev <guitar@sib.li>",
