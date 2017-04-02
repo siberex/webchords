@@ -27,30 +27,33 @@
     <!-- Load polyfills; note that "loader" will load these async -->
     <script defer src="node_modules/webcomponents.js/webcomponents-loader.js"></script>
 
-
+    <!-- Load guitar chord web component -->
     <link rel="import" href="node_modules/webchords/tab-chord.html">
 
+    <style>
+        tab-chord {
+            margin-right: 10px;
+        }
+    </style>
 </head>
 <body>
 
-    <!-- <tab-chord value="023432"></tab-chord> -->
+    <h3>Learn some chords:</h3>
     <tab-chord name="Am"></tab-chord>
-    <tab-chord name="Bm"></tab-chord>
-    <!-- <tab-chord name="Cm"></tab-chord>
-    <tab-chord name="Dm"></tab-chord>
-    <tab-chord name="Dm" value="×00231"></tab-chord>
-    <tab-chord name="Em"></tab-chord>
-    <tab-chord name="Fm"></tab-chord>
+    <tab-chord name="E"></tab-chord>
+    <tab-chord name="Cm"></tab-chord>
+    <tab-chord name="Dm/A" value="×00231"></tab-chord>
+    <tab-chord name="D6²" value="×x0432"></tab-chord>
     <tab-chord name="Gm"></tab-chord>
-
-
-    <tab-chord name="A"></tab-chord> -->
-    <tab-chord name="B"></tab-chord>
-    <!-- <tab-chord name="C"></tab-chord>
     <tab-chord name="D"></tab-chord>
-    <tab-chord name="E"></tab-chord> -->
+
+    <h3>And some barre chords:</h3>
+    <tab-chord name="B"></tab-chord>
     <tab-chord name="F"></tab-chord>
-    <!-- <tab-chord name="G"></tab-chord> -->
+    <tab-chord name="Bm"></tab-chord>
+    <tab-chord name="Fm"></tab-chord>
+
+    <h3>Now you are ready to rock!</h3>
 
 </body>
 </html>
