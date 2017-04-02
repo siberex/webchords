@@ -14,11 +14,11 @@ Web component for guitar chords display on any web page.
 
 With npm:
  
-	npm install siberex/webchords 
+	npm install siberex/webchords --save
 
 With bower:
 
-	bower install siberex/webchords
+	bower install siberex/webchords --save
 
 
 ### Usage
