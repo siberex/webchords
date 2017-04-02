@@ -37,9 +37,16 @@ With bower:
 
 ### Local web server with PHP
 
-Launch command:
+To test component debug page:
+	
+	npm install
+	php -S 127.0.0.1:8877 -t ./test
 
-	php -S 0.0.0.0:8877
+To check demo page:
+
+	npm --prefix ./docs install
+	php -S 127.0.0.1:8877 -t ./docs
+    
     
 Then go to [http://localhost:8877/](http://localhost:8877/)
 
