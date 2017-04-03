@@ -34,7 +34,7 @@ With bower:
 ```
 
 
-
+<!--
 ### Local web server with PHP
 
 To test component debug page:
@@ -49,6 +49,4 @@ To check demo page:
     
     
 Then go to [http://localhost:8877/](http://localhost:8877/)
-
-
-
+-->
