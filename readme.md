@@ -25,7 +25,7 @@ With bower:
 
 ```html
     <script defer src="https://cdnjs.cloudflare.com/ajax/libs/webcomponentsjs/1.0.0-rc.7/webcomponents-loader.js"></script>
-    <link rel="import" href="webchords/tab-chord.html">
+    <link rel="import" href="node_modules/webchords/tab-chord.html">
 
     <tab-chord name="Am"></tab-chord>
     <tab-chord name="E"></tab-chord>
