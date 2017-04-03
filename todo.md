@@ -4,6 +4,8 @@
 
 - Barre display support
 
+- Fret shift display support
+
 
 ### Compatibility issues
 
@@ -14,3 +16,9 @@
 	- Do it only for browsers who does not support ES6
 	
 - Use [polymer-bundler](https://github.com/Polymer/polymer-bundler) for release builds
+
+### Tests and demos
+
+- Add some tests with [web-component-tester](https://github.com/Polymer/web-component-tester)
+
+- Add automatic screenshot generation for gh-pages
