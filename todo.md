@@ -6,6 +6,8 @@
 
 - Fret shift display support
 
+- Ukulele chords display support
+
 
 ### Compatibility issues
 
