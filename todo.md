@@ -9,6 +9,20 @@
 - Ukulele chords display support
 
 
+### Bugs
+
+- fretboard-header is broken everywhere except desktop Chrome, more specifically:
+	
+	- iOS Chrome/Safari: chord header is broken, everything else is ok
+	
+	- Safari desktop: chord header is broken, everything else is ok
+	
+
+- FireFox is broken almost completely
+
+- Edge 14 is broken almost completely
+
+
 ### Compatibility issues
 
 - Add Babel for ES6 classes and syntax
