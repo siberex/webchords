@@ -17,6 +17,9 @@
 	
 - Use [polymer-bundler](https://github.com/Polymer/polymer-bundler) for release builds
 
+- Browser support test and polyfill missing
+
+
 ### Tests and demos
 
 - Add some tests with [web-component-tester](https://github.com/Polymer/web-component-tester)
