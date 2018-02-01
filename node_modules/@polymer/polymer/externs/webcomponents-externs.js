@@ -1,44 +1,30 @@
 /**
  * @fileoverview Externs for webcomponents polyfills
  * @externs
+ *
+ * @license
+ * Copyright (c) 2017 The Polymer Project Authors. All rights reserved.
+ * This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+ * The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+ * The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+ * Code distributed by Google as part of the polymer project is also
+ * subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
  */
-
-/**
- * @constructor
- * @extends {HTMLElement}
- */
-function CustomStyle(){}
-/**
- * @param {!HTMLStyleElement} style
- */
-CustomStyle.prototype.processHook = function(style){};
+/* eslint-disable */
 
 let HTMLImports = {
   /**
    * @param {function()} callback
    */
-  whenReady(callback){}
+  whenReady(callback){},
+  /**
+   * @param {Element} element
+   * @returns {Document} document
+   */
+  importForElement(element){}
 };
 
 window.HTMLImports = HTMLImports;
-
-let ShadyCSS = {
-  /**
-   * @param {!HTMLElement} element
-   * @param {Object=} overrides
-   */
-  applyStyle(element, overrides){},
-  updateStyles(){},
-  /**
-   * @param {!HTMLTemplateElement} template
-   * @param {string} is
-   * @param {string=} extendsElement
-   */
-  prepareTemplate(template, is, extendsElement){},
-  nativeCss: false,
-  nativeShadow: false
-};
-window.ShadyCSS = ShadyCSS;
 
 let ShadyDOM = {
   inUse: false,
@@ -70,4 +56,9 @@ HTMLElement.prototype._activeElement;
 /**
  * @param {HTMLTemplateElement} template
  */
-HTMLTemplateElement.prototype.decorate = function(template){};
+HTMLTemplateElement.decorate = function(template){};
+
+/**
+ * @param {function(function())} cb callback
+ */
+CustomElementRegistry.prototype.polyfillWrapFlushCallback = function(cb){};

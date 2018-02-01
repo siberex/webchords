@@ -8,6 +8,8 @@ Code distributed by Google as part of the polymer project is also
 subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
 -->
 
+<link rel="import" href="../utils/mixin.html">
+
 <script>
 (function() {
   'use strict';
@@ -55,6 +57,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
    * (e.g. `this.notifyPath('items')`) to update the tree.  Note that all
    * elements that wish to be updated based on deep mutations must apply this
    * mixin or otherwise skip strict dirty checking for objects/arrays.
+   * Specifically, any elements in the binding tree between the source of a
+   * mutation and the consumption of it must apply this mixin or enable the
+   * `Polymer.OptionalMutableData` mixin.
    *
    * In order to make the dirty check strategy configurable, see
    * `Polymer.OptionalMutableData`.
@@ -63,14 +68,20 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
    * will be worse as opposed to using strict dirty checking with immutable
    * patterns or Polymer's path notification API.
    *
-   * @polymerMixin
+   * @mixinFunction
+   * @polymer
    * @memberof Polymer
    * @summary Element class mixin to skip strict dirty-checking for objects
    *   and arrays
    */
-  Polymer.MutableData = (superClass) => {
+  Polymer.MutableData = Polymer.dedupingMixin(superClass => {
 
-    return class MutableData extends superClass {
+    /**
+     * @polymer
+     * @mixinClass
+     * @implements {Polymer_MutableData}
+     */
+    class MutableData extends superClass {
       /**
        * Overrides `Polymer.PropertyEffects` to provide option for skipping
        * strict equality checking for Objects and Arrays.
@@ -93,8 +104,13 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       }
 
     }
+    /** @type {boolean} */
+    MutableData.prototype.mutableData = false;
 
-  };
+    return MutableData;
+
+  });
+
 
   /**
    * Element class mixin to add the optional ability to skip strict
@@ -119,6 +135,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
    * (e.g. `this.notifyPath('items')`) to update the tree.  Note that all
    * elements that wish to be updated based on deep mutations must apply this
    * mixin or otherwise skip strict dirty checking for objects/arrays.
+   * Specifically, any elements in the binding tree between the source of a
+   * mutation and the consumption of it must enable this mixin or apply the
+   * `Polymer.MutableData` mixin.
    *
    * While this mixin adds the ability to forgo Object/Array dirty checking,
    * the `mutableData` flag defaults to false and must be set on the instance.
@@ -128,14 +147,20 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
    * strict dirty checking with immutable patterns or Polymer's path notification
    * API.
    *
-   * @polymerMixin
+   * @mixinFunction
+   * @polymer
    * @memberof Polymer
    * @summary Element class mixin to optionally skip strict dirty-checking
    *   for objects and arrays
    */
-  Polymer.OptionalMutableData = (superClass) => {
+  Polymer.OptionalMutableData = Polymer.dedupingMixin(superClass => {
 
-    return class OptionalMutableData extends superClass {
+    /**
+     * @mixinClass
+     * @polymer
+     * @implements {Polymer_OptionalMutableData}
+     */
+    class OptionalMutableData extends superClass {
 
       static get properties() {
         return {
@@ -171,7 +196,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       }
     }
 
-  };
+    return OptionalMutableData;
+
+  });
 
   // Export for use by legacy behavior
   Polymer.MutableData._mutablePropertyChange = mutablePropertyChange;
