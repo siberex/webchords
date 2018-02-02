@@ -41,13 +41,13 @@
                 let chromaticScale = 'C C# D D# E F F# G G# A Bb B'.split(' ');
 
                 let chromaticScaleMap = 'C C# D D# E F F# G G# A A# B'.split(' ')
-                    .map( (key, i) => [key, i] )
-                    .reduce( (acc, val) => {acc[val[0]] = val[1]; return acc}, {} );
+                    .map( (key, i) => ({[key]: i}) )
+                    .reduce( (acc, val) => Object.assign(acc, val), {} );
 
                 // Add indices for flats too
                 chromaticScaleMap = 'C Db D Eb E F Gb G Ab A Bb B'.split(' ')
-                    .map( (key, i) => [key, i] )
-                    .reduce( (acc, val) => {acc[val[0]] = val[1]; return acc}, chromaticScaleMap );
+                    .map( (key, i) => ({[key]: i}) )
+                    .reduce( (acc, val) => Object.assign(acc, val), chromaticScaleMap );
 
 
 
