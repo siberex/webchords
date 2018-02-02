@@ -1,11 +1,57 @@
-<!--
 <link rel="import" href="node_modules/@polymer/polymer/polymer-element.html">
-<link rel="import" href="node_modules/@polymer/polymer/lib/elements/dom-repeat.html">
--->
-<link rel="import" href="https://polygit.org/polymer+2.4.0/components/polymer/polymer-element.html">
-<link rel="import" href="https://polygit.org/polymer+2.4.0/components/polymer/lib/elements/dom-repeat.html">
-
+<!-- <link rel="import" href="../@polymer/polymer/polymer-element.html"> -->
 
 <dom-module id="fretboard-string">
+
+    <template>
+        <style>
+            :host {
+                display: block;
+
+            }
+
+        </style>
+
+        <div>
+        </div>
+
+    </template>
+
+    <script>
+        /**
+         * `fretboard-string`
+         *
+         *
+         * @customElement
+         * @polymer
+         * @demo demo/index.html
+         */
+        class FretboardString extends Polymer.Element {
+            static get is() { return 'fretboard-string'; }
+            static get properties() {
+                return {
+                    index   : {
+                        type    : Number,
+                        value   : 0,
+                        //notify: true,
+                        //reflectToAttribute: true,
+                    },
+                    tone    : {
+                        type    : String,
+                        value   : 'C',
+                        //notify: true,
+                        //reflectToAttribute: true,
+                    }
+                };
+            }
+
+            constructor() {
+                super();
+            }
+
+        }
+
+        window.customElements.define(FretboardString.is, FretboardString);
+    </script>
 
 </dom-module>

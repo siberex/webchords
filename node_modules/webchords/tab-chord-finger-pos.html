@@ -1,7 +1,4 @@
-<!--
 <link rel="import" href="node_modules/@polymer/polymer/polymer-element.html">
--->
-<link rel="import" href="https://polygit.org/polymer+2.4.0/components/polymer/polymer-element.html">
 
 
 <dom-module id="tab-chord-finger-pos">
@@ -29,10 +26,10 @@
             .tab-chord-finger-pos {
 
                 position: absolute;
-                top: calc( var(--fret-distance) * ([[fret]] - 1) + var(--dot-margin-top) );
-                /*left: calc( var(--string-distance) * [[stringIndex]] - var(--string-distance) / 2 + 1px );*/
-                /*left: calc( var(--string-distance) * [[stringIndex]] - var(--dot-size) / 2 );*/
-                left: calc( var(--string-distance) * ([[stringIndex]]) + var(--dot-margin-left) );
+                top: calc( var(--fret-distance) * (var(--fret-index) - 1) + var(--dot-margin-top) );
+                /*left: calc( var(--string-distance) * var(--string-index) - var(--string-distance) / 2 + 1px );*/
+                /*left: calc( var(--string-distance) * var(--string-index) - var(--dot-size) / 2 );*/
+                left: calc( var(--string-distance) * var(--string-index) + var(--dot-margin-left) );
 
                 background: #555;
                 border: 1px solid black;
@@ -69,7 +66,9 @@
         </style>
 
 
-        <div class="tab-chord-finger-pos">
+        <div class="tab-chord-finger-pos"
+             style="--string-index: [[stringIndex]];
+                    --fret-index: [[fret]];">
             <div class="caption"><slot></slot></div>
         </div>
 
