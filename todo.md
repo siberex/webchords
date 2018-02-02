@@ -11,11 +11,11 @@
 
 ### Bugs
 
-- fretboard-header is broken everywhere except desktop Chrome, more specifically:
++ fretboard-header is broken everywhere except desktop Chrome, more specifically:
 	
-	- iOS Chrome/Safari: chord header is broken, everything else is ok
+	+ iOS Chrome/Safari: chord header is broken, everything else is ok
 	
-	- Safari desktop: chord header is broken, everything else is ok
+	+ Safari desktop: chord header is broken, everything else is ok
 	
 
 - FireFox is broken almost completely
