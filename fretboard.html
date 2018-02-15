@@ -14,7 +14,10 @@
             }
         </style>
 
-        <fretboard-string index="0" thickness="1" tone="C"></fretboard-string>
+        <fretboard-string index="0" thickness="1" tone="E"></fretboard-string>
+        <fretboard-string index="1" thickness="2" tone="B"></fretboard-string>
+        <fretboard-string index="2" thickness="3" tone="G"></fretboard-string>
+        <fretboard-string index="3" thickness="4" tone="D"></fretboard-string>
 
     </template>
 
@@ -40,6 +43,7 @@
 
                 let chromaticScale = 'C C# D D# E F F# G G# A Bb B'.split(' ');
 
+
                 let chromaticScaleMap = 'C C# D D# E F F# G G# A A# B'.split(' ')
                     .map( (key, i) => ({[key]: i}) )
                     .reduce( (acc, val) => Object.assign(acc, val), {} );
@@ -49,6 +53,10 @@
                     .map( (key, i) => ({[key]: i}) )
                     .reduce( (acc, val) => Object.assign(acc, val), chromaticScaleMap );
 
+
+                // Chromatic scale from the key of F:
+                // let keyIndex = chromaticScaleMap['F'];
+                // chromaticScale.slice( keyIndex ).concat( chromaticScale.slice(0, keyIndex) )
 
 
             }
