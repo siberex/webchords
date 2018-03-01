@@ -1,0 +1,66 @@
+<link rel="import" href="../@polymer/polymer/polymer-element.html">
+
+<dom-module id="keyboard-key">
+
+    <template>
+        <style>
+            :host {
+                display: block;
+            }
+
+        </style>
+
+        <div>
+        </div>
+
+    </template>
+
+    <script>
+        /**
+         * `keyboard-key`
+         *
+         *
+         * @customElement
+         * @polymer
+         * @demo demo/index.html
+         */
+        class KeyboardKey extends Polymer.Element {
+            static get is() { return 'keyboard-key'; }
+            static get properties() {
+                return {
+                    index   : {
+                        type    : Number,
+                        value   : 0
+                    },
+                    octave  : {
+                        type    : Number,
+                        value   : 0
+                    },
+                    note    : {
+                        type    : String,
+                        value   : 'C'
+                    }
+                };
+            }
+
+            constructor() {
+                super();
+
+                // There are black (b) and white (w) keys
+                // Blacks are all the same
+                // Whites have 3 types:
+                // |.¹    .|.²    .|³
+
+                // Full octave looks like this:
+                // C  C# D  D# E  F  F# G  G# A  Bb B
+                // w¹ b  w² b  w³ w¹ b  w² b  w² b  w³
+
+
+            }
+
+        }
+
+        window.customElements.define(KeyboardKey.is, KeyboardKey);
+    </script>
+
+</dom-module>
