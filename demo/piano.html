@@ -1,0 +1,33 @@
+
+
+
+<script src="node_modules/webmidi/webmidi.min.js"></script>
+<script src="node_modules/tone/build/Tone.min.js"></script>
+
+
+
+<script>
+
+    // https://github.com/cotejp/webmidi
+
+    WebMidi.enable(function (err) {
+
+        if (err) {
+            console.log("WebMidi could not be enabled.", err);
+        } else {
+            console.log("WebMidi enabled!");
+        }
+
+    });
+
+
+
+    // https://github.com/Tonejs/Tone.js
+
+    //create a synth and connect it to the master output (your speakers)
+    var synth = new Tone.Synth().toMaster();
+
+    //play a middle 'C' for the duration of an 8th note
+    synth.triggerAttackRelease("C4", "8n");
+
+</script>
