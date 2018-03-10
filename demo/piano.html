@@ -17,7 +17,7 @@
 
     function playNote(name, octave) {
         let note = name + octave.toString();
-        //console.log(note);
+        console.log(note);
 
         // Play a note for the duration of an 8th note
         synth.triggerAttackRelease(note, '8n');
@@ -30,15 +30,22 @@
     WebMidi.enable(function (error) {
         if (error) throw error;
 
-        if (!WebMidi.inputs.length) {
-            console.log('No MIDI inputs found');
+        let inputs = WebMidi.inputs;
+
+        inputs = inputs.filter(input => input.state === 'connected');
+
+        if (!inputs.length) {
+            console.log('No MIDI inputs connected');
             return false;
         }
 
         let inputNames = WebMidi.inputs.map(input => input.name);
-        console.log('MIDI inputs found', inputNames);
+        console.log('MIDI inputs connected', inputNames);
 
-        WebMidi.inputs.forEach(input => {
+        inputs.forEach(input => {
+
+            //console.log(input);
+
             input.addListener('noteon', 'all', function (e) {
                 playNote(e.note.name, e.note.octave);
             });
