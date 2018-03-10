@@ -8,26 +8,46 @@
 
 <script>
 
+
+    // https://github.com/Tonejs/Tone.js
+
+    // Create a synth and connect it to the master output (your speakers)
+    let synth = new Tone.Synth().toMaster();
+
+
+    function playNote(name, octave) {
+        let note = name + octave.toString();
+        //console.log(note);
+
+        // Play a note for the duration of an 8th note
+        synth.triggerAttackRelease(note, '8n');
+    }
+
+
+
     // https://github.com/cotejp/webmidi
 
-    WebMidi.enable(function (err) {
+    WebMidi.enable(function (error) {
+        if (error) throw error;
 
-        if (err) {
-            console.log("WebMidi could not be enabled.", err);
-        } else {
-            console.log("WebMidi enabled!");
+        if (!WebMidi.inputs.length) {
+            console.log('No MIDI inputs found');
+            return false;
         }
+
+        let inputNames = WebMidi.inputs.map(input => input.name);
+        console.log('MIDI inputs found', inputNames);
+
+        WebMidi.inputs.forEach(input => {
+            input.addListener('noteon', 'all', function (e) {
+                playNote(e.note.name, e.note.octave);
+            });
+        });
+
 
     });
 
 
 
-    // https://github.com/Tonejs/Tone.js
-
-    //create a synth and connect it to the master output (your speakers)
-    var synth = new Tone.Synth().toMaster();
-
-    //play a middle 'C' for the duration of an 8th note
-    synth.triggerAttackRelease("C4", "8n");
 
 </script>
