@@ -1,10 +1,61 @@
 <link rel="import" href="../@polymer/polymer/polymer-element.html">
+<link rel="import" href="../@polymer/polymer/lib/elements/dom-repeat.html">
 
 
 <link rel="import" href="keyboard-key.html">
 
 
-<dom-module id="inst-keyboard">
+<dom-module id="pianoboard">
 
+
+    <template>
+        <style>
+            :host {
+                display: block;
+            }
+
+
+        </style>
+
+        <div class="pianoboard">
+            <template is="dom-repeat" items="[[keys]]" as="key">
+                <keyboard-key>[[key.name]]</keyboard-key>
+            </template>
+        </div>
+
+    </template>
+
+
+    <script>
+
+        /**
+         * `pianoboard`
+         *
+         *
+         * @customElement
+         * @polymer
+         * @demo demo/index.html
+         */
+        class Pianoboard extends Polymer.Element {
+            static get is() { return 'pianoboard'; }
+            static get properties() {
+                return {
+                    noteMin    : {
+                        type    : String,
+                        value   : 'C2'
+                    }
+                };
+            }
+
+            constructor() {
+                super();
+
+                //
+            }
+
+        }
+
+        window.customElements.define(Pianoboard.is, Pianoboard);
+    </script>
 
 </dom-module>
