@@ -13,6 +13,7 @@
     "url": "https://github.com/siberex/webchords.git"
   },
   "dependencies": {
+    "startaudiocontext": "^1.2.1",
     "tone": "^0.11.12",
     "webmidi": "^2.0.0"
   }
