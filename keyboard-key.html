@@ -8,15 +8,59 @@
                 display: block;
             }
 
+            .keyboard-key {
+                /*position: absolute;*/
+                float: left;
+
+                border: 1px solid #000;
+
+                min-height: 320px;
+                min-width: 74px;
+            }
+
+            .natural {
+                background-color: #DDD;
+            }
+
+            .accidental {
+                background-color: #333;
+                width: 63.793%;
+                height: 61.54%;
+
+                display: none;
+            }
+
+
 
             /*
                 https://css-tricks.com/aspect-ratio-boxes/
             */
+            .keyboard-key::before {
+                content: "";
+                width: 1px;
+                margin-left: -1px;
+                float: left;
+                height: 0;
+                padding-top: 22.308%; /* 29/130 aspect ratio for white keys */
+            }
+            .keyboard-key::after { /* to clear float */
+                content: "";
+                display: table;
+                clear: both;
+            }
 
+            .keyboard-key.accidental::before {
+                padding-top: 23.125%; /* 37/160 aspect ratio for black keys */
+                /* @fixme switch to 3/13 aspect ratio for both blacks and whites? */
+            }
 
 
             /*
+                There are white (natural) and black (accidental — sharps/flats) keys.
+                Blacks are all the same.
+                Whites have several different shapes:
 
+                  0   1  2  3   4   5   6  7  8  9  10  11
                 +-----------------------------------------+
                 |   |   | |   |   |   |   | |   | |   |   |
                 |   |C# | |D# |   |   |F# | |G# | |A# |   |
@@ -28,38 +72,44 @@
                 |  C  |  D  |  E  |  F  |  G  |  A  |  B  |
                 +-----+-----+-----+-----+-----+-----+-----+
 
+                Black indices: 1,3,6,8,10;
+                Whites: 0,2,4,5,7,9,11.
             */
 
             .natural.c,
             .natural.f {
+
+                shape-outside: polygon(0 0, 61.2% 0, 61.2% 61.54%, 100% 61.54%, 100% 100%, 0 100%);
                 clip-path: polygon(0 0, 61.2% 0, 61.2% 61.54%, 100% 61.54%, 100% 100%, 0 100%);
             }
 
             .natural.d {
+                shape-outside: polygon(25% 0, 75% 0, 75% 61.54%, 100% 61.54%, 100% 100%, 0 100%, 0 61.54%, 25% 61.54%);
                 clip-path: polygon(25% 0, 75% 0, 75% 61.54%, 100% 61.54%, 100% 100%, 0 100%, 0 61.54%, 25% 61.54%);
             }
 
             .natural.e,
             .natural.b {
+                shape-outside: polygon(38.8% 0, 100% 0, 100% 100%, 0 100%, 0 61.54%, 38.8% 61.54%);
                 clip-path: polygon(38.8% 0, 100% 0, 100% 100%, 0 100%, 0 61.54%, 38.8% 61.54%);
             }
 
             .natural.g {
+                shape-outside: polygon(25% 0, 68.1% 0, 68.1% 61.54%, 100% 61.54%, 100% 100%, 0 100%, 0 61.54%, 25% 61.54%);
                 clip-path: polygon(25% 0, 68.1% 0, 68.1% 61.54%, 100% 61.54%, 100% 100%, 0 100%, 0 61.54%, 25% 61.54%);
             }
 
             .natural.a {
+                shape-outside: polygon(31.9% 0, 75% 0, 75% 61.54%, 100% 61.54%, 100% 100%, 0 100%, 0 61.54%, 31.9% 61.54%);
                 clip-path: polygon(31.9% 0, 75% 0, 75% 61.54%, 100% 61.54%, 100% 100%, 0 100%, 0 61.54%, 31.9% 61.54%);
-            }
-
-            .accidental {
-
             }
 
 
         </style>
 
-        <div>
+        <div class$="[[getClass()]]">
+            <!--<slot></slot>-->
+            [[note]][[octave]].[[index]].{{isNatural(index)}}
         </div>
 
     </template>
@@ -76,12 +126,13 @@
          */
         class KeyboardKey extends Polymer.Element {
             static get is() { return 'keyboard-key'; }
+
             static get properties() {
                 return {
-                    index   : {
+                    /*index   : {
                         type    : Number,
                         value   : 0
-                    },
+                    },*/
                     octave  : {
                         type    : Number,
                         value   : 0
@@ -93,20 +144,49 @@
                 };
             }
 
+
             constructor() {
                 super();
 
-                // There are black (b) and white (w) keys
-                // Blacks are all the same
-                // Whites have 3 types:
-                // |.¹    .|.²    .|³
+                let chromaticScaleMap = 'C C# D D# E F F# G G# A A# B'.split(' ')
+                    .map( (key, i) => ({[key]: i}) )
+                    .reduce( (acc, val) => Object.assign(acc, val), {} );
 
-                // Full octave looks like this:
-                // C  C# D  D# E  F  F# G  G# A  Bb B
-                // w¹ b  w² b  w³ w¹ b  w² b  w² b  w³
+                // Add indices for flats too
+                chromaticScaleMap = 'C Db D Eb E F Gb G Ab A Bb B'.split(' ')
+                    .map( (key, i) => ({[key]: i}) )
+                    .reduce( (acc, val) => Object.assign(acc, val), chromaticScaleMap );
 
+                this.chromaticScaleMap = chromaticScaleMap;
 
             }
+
+
+            ready() {
+                super.ready();
+
+                this.index = this.chromaticScaleMap[this.note];
+            }
+
+
+            getClass() {
+                this.index = this.chromaticScaleMap[this.note];
+                return KeyboardKey.is + ' ' + (this.isNatural(this.index) ? 'natural' : 'accidental') + ' ' + this.note.toLowerCase();
+            }
+
+            isNatural(i) {
+                // [0,2,4,5,7,9,11] — white
+                // [1,3,6,8,10] — black
+                // let i = this.index;
+                return i > 4 ? !!(i & 1) : !(i & 1);
+            }
+
+
+            getLeftPos() {
+
+            }
+
+
 
         }
 

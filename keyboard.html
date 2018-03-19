@@ -5,7 +5,7 @@
 <link rel="import" href="keyboard-key.html">
 
 
-<dom-module id="pianoboard">
+<dom-module id="piano-keyboard">
 
 
     <template>
@@ -15,11 +15,21 @@
             }
 
 
+            .piano-keyboard {
+                width: 2900px;
+                height: 520px;
+            }
+
+
         </style>
 
-        <div class="pianoboard">
+        <div class="piano-keyboard">
             <template is="dom-repeat" items="[[keys]]" as="key">
-                <keyboard-key>[[key.name]]</keyboard-key>
+
+                <!--
+                <keyboard-key octave="[[key.octave]]" note="[[key.note]]">[[key.name]]</keyboard-key>
+                -->
+
             </template>
         </div>
 
@@ -28,21 +38,31 @@
 
     <script>
 
+        // A0 (27.5 Hz) to C8 (4186.01 Hz) — standard 88-key piano keyboard
+        // http://www.sengpielaudio.com/calculator-notenames.htm
+        const NOTE_MIN = 'A0';
+        const NOTE_MAX = 'C8';
+
+
         /**
-         * `pianoboard`
+         * `piano-keyboard`
          *
          *
          * @customElement
          * @polymer
          * @demo demo/index.html
          */
-        class Pianoboard extends Polymer.Element {
-            static get is() { return 'pianoboard'; }
+        class PianoKeyboard extends Polymer.Element {
+            static get is() { return 'piano-keyboard'; }
             static get properties() {
                 return {
                     noteMin    : {
                         type    : String,
-                        value   : 'C2'
+                        value   : NOTE_MIN
+                    },
+                    noteMax    : {
+                        type    : String,
+                        value   : NOTE_MAX
                     }
                 };
             }
@@ -50,12 +70,30 @@
             constructor() {
                 super();
 
-                //
+                let keys    = [];
+                let scale   = 'C C# D D# E F F# G G# A A# B'.split(' ');
+
+                console.log(this.noteMin, 'here');
+
+                for (let octave = 3; octave < 5; octave++) {
+                    keys = keys.concat(
+                        scale.map(note => {
+                            let name = note + octave.toString();
+                            return {
+                                name    : name,
+                                note    : note,
+                                octave  : octave
+                            };
+                        })
+                    )
+                }
+
+                this.keys = keys;
             }
 
         }
 
-        window.customElements.define(Pianoboard.is, Pianoboard);
+        window.customElements.define(PianoKeyboard.is, PianoKeyboard);
     </script>
 
 </dom-module>
