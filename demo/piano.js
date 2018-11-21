@@ -106,22 +106,23 @@ WebMidi.enable(function (error) {
                 console.error('Unknown MIDI control received');
             }
 
+            // https://www.midi.org/specifications-old/item/table-3-control-change-messages-data-bytes-2
             switch(e.controller.number) {
                 case 1:
                     // Modulation change
-                    console.log (e.target.name, 'Modulation', e.value / 127);
+                    console.log (e.target.name, 'Modulation', e.value / 127, e.data[2]);
                     break;
                 case 7:
                     // Volume change
-                    console.log (e.target.name, 'Volume', e.value / 127);
+                    console.log (e.target.name, 'Volume', e.value / 127, e.data[2]);
                     break;
                 case 11:
                     // e.controller.name == 'expressioncoarse'
-                    console.log (e.target.name, 'Expression Pedal', e.value / 127);
+                    console.log (e.target.name, 'Expression Pedal', e.value / 127, e.data[2]);
                     break;
                 case 64:
                     // e.controller.name == 'holdpedal'
-                    console.log (e.target.name, 'Sustain Pedal', e.value === 0);
+                    console.log (e.target.name, 'Sustain Pedal', e.value >= 64 ? 'off' : 'on', e.data[2]);
                     break;
                 default:
                     console.log('controlchange', e);
@@ -130,10 +131,10 @@ WebMidi.enable(function (error) {
         });
 
         input.addListener('pitchbend', 'all', function(e) {
-            console.log (e.target.name, 'Pitch', e.value);
+            console.log (e.target.name, 'Pitch', e.value, e.data[2]);
         });
         input.addListener('programchange', 'all', function(e) {
-            console.log (e.target.name, 'Program', e.value);
+            console.log (e.target.name, 'Program', e.value, e.data[1]);
         });
 
     });
