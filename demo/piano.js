@@ -108,16 +108,20 @@ WebMidi.enable(function (error) {
 
             switch(e.controller.number) {
                 case 1:
-
                     // Modulation change
-                    console.log (e.target.id, 'Modulation', e.value / 127);
-
+                    console.log (e.target.name, 'Modulation', e.value / 127);
                     break;
                 case 7:
-
                     // Volume change
-                    console.log (e.target.id, 'Volume', e.value / 127);
-
+                    console.log (e.target.name, 'Volume', e.value / 127);
+                    break;
+                case 11:
+                    // e.controller.name == 'expressioncoarse'
+                    console.log (e.target.name, 'Expression Pedal', e.value / 127);
+                    break;
+                case 64:
+                    // e.controller.name == 'holdpedal'
+                    console.log (e.target.name, 'Sustain Pedal', e.value === 0);
                     break;
                 default:
                     console.log('controlchange', e);
@@ -126,10 +130,10 @@ WebMidi.enable(function (error) {
         });
 
         input.addListener('pitchbend', 'all', function(e) {
-            console.log (e.target.id, 'Pitch', e.value);
+            console.log (e.target.name, 'Pitch', e.value);
         });
         input.addListener('programchange', 'all', function(e) {
-            console.log (e.target.id, 'Program', e.value);
+            console.log (e.target.name, 'Program', e.value);
         });
 
     });
